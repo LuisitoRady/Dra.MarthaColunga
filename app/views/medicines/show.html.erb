@@ -1,0 +1,20 @@
+<div class="jumbotron">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <h1 class="display-4"><%= @medicine.name %></h1>
+	</p>
+
+	<p class="lead">
+	  <%= "Contiene #{@medicine.pills} píldoras" %>
+	</p>
+
+	<p class="lead">
+	  <strong>Descripción:</strong>
+	  <%= @medicine.description %>
+	</p>
+
+	<%= link_to 'Editar', edit_medicine_path(@medicine), class: "btn btn-outline-info" %> |
+	<%= link_to 'Regresar a medicamentos', medicines_path, class: "btn btn-outline-info" %>
+</div>
+

@@ -1,0 +1,70 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mt-3">
+    <%= form.label "Nombres" %>
+    <%= form.text_field :names, class: "form-control" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= form.label "Apellidos" %>
+    <%= form.text_field :lastnames, class: "form-control" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= form.label "Tipo" %>
+    <%= form.text_field :type, class: "form-control ", :disabled => true %>
+  </div>
+
+  <div class="field mt-3">
+    <%= form.label "Años" %>
+    <%= form.number_field :age, class: "form-control" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= form.label "Celular" %>
+    <%= form.text_field :cellphone, class: "form-control" %>
+  </div>
+
+  <% if @type == "Pacient" %>
+    <div class="field mt-3">
+      <%= form.label "Semana inicial de embarazo" %>
+      <%= form.number_field :init_preg_week, class: "form-control" %>
+    </div>
+
+  <% elsif @type == "Secretary" %>
+    <div class="field mt-3">
+      <%= form.label "Salario" %>
+      <%= form.text_field :salary, class: "form-control" %>
+    </div>
+  <% end %>
+
+   <div class="field mt-3">
+      <%= form.label "Categoria" %>
+      <%= form.collection_select :category_id, Category.all, :id, :status, prompt: true, class: "form-control" %>
+    </div>
+
+  <div class="field mt-3">
+    <%= form.label "Correo" %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= form.label "Contraseña" %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+  
+  <div class="actions mt-3">
+    <%= form.submit%>
+  </div>
+<% end %>

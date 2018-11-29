@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Treatments</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Dosis</th>
+      <th>Instrucciones</th>
+      <th>Paciente</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @treatments.each do |treatment| %>
+      <tr>
+        <td><%= treatment.dosis %></td>
+        <td><%= treatment.instructions %></td>
+        <td><%= treatment.user.names + " " + treatment.user.lastnames %></td>
+        <td><%= link_to 'Mostar', treatment %></td>
+        <% if current_user.type != "Pacient" %>
+          <td><%= link_to 'Editar', edit_treatment_path(treatment) %></td>
+          <td><%= link_to 'Destruir', treatment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.type != "Pacient" %>
+  <%= link_to 'Nuevo Tratamiento', new_treatment_path, class: "btn btn-outline-warning mt-4" %>
+<% else %>
+  <p><i>
+  Si tiene alguna molestia con algunos de los medicamentos, favor de mandar un mensaje al 81 82 52 58 10 o marcar al consultorio para verlo lo más pronto posible, gracias.
+</i></p>
+<% end %>

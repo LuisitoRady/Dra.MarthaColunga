@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="jumbotron mt-3">
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <h1 class="display-4"><%= @user.names + " " + @user.lastnames %></h1> 
+    </p>
+
+
+    <p class="lead">
+      <%= "Su cuenta es de tipo " + @user.type %>
+    </p>
+
+    <p class="lead">
+      <%= "Tiene #{@user.age} años de edad" %>
+    </p>
+
+    <p class="lead">
+      Para contactarlo via celular es: <strong><%= @user.cellphone %></strong>
+    </p>
+
+    <p class="lead">
+      <%= "Su correo electrónico es: " +@user.email %>
+    </p>
+
+    <% if @user.type == "Pacient" %>
+      <p>
+        <strong>Init preg week:</strong>
+        <%= @user.init_preg_week %>
+      </p>
+
+      <p>
+        <strong>Category:</strong>
+        <%= @user.category.status %>
+      </p>
+    <% elsif @user.type == "Secretary" %>
+      <p>
+        <strong>Salary:</strong>
+        <%= @user.salary %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Editar', edit_user_path(@user) %> |
+    <%= link_to 'Ver todos los usuarios', users_path %>
+  </div>
+  
+</div>
+

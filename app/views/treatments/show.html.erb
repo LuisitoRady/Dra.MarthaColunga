@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <p id="notice"><%= notice %></p>
+
+  <% @medicines.each do |medicine| %>
+    <p>
+      <% if current_user.type != "Pacient" %>
+        <strong class="display-4"><%= link_to medicine.name, medicine %></strong>
+      <% else %>
+        <strong class="display-4"><%= medicine.name %></strong>
+      <% end %>
+    </p>
+  <% end %>
+
+  <p class="lead">
+    <strong>Dosis:</strong>
+    <%= @treatment.dosis %>
+  </p>
+
+  <p class="lead">
+    <strong>Instructions:</strong>
+    <%= @treatment.instructions %>
+  </p>
+
+  <p>
+    <strong class="lead">Paciente:</strong>
+    <%= @treatment.user.names + " " + @treatment.user.lastnames %>
+  </p>
+  <p>
+    <% if current_user.type != "Pacient" %>
+      <%= link_to 'Editar', edit_treatment_path(@treatment), class: "btn btn-outline-warning" %> |
+      <%= link_to 'Volver a los tratamientos', treatments_path, class: "btn btn-outline-warning" %>
+    <% else %>
+      <%= link_to 'Volver a los tratamientos', treatments_path, class: "btn btn-outline-warning" %>
+    <% end %>
+  </p>
+</div>
+
+
+

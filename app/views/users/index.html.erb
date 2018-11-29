@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+  <h1>All <%= @type + "s" %></h1>
+  
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Names</th>
+        <th scope="col">Lastnames</th>
+        <th scope="col">Type</th>
+        <th scope="col">Age</th>
+        <th scope="col">Cellphone</th>
+        <th scope="col">Email</th>
+        <% if @type == "Pacient" %>
+          <th scope="col">Init preg week</th>
+          <th scope="col">Category</th>
+        <% elsif @type == "Secretary" %>
+          <th scope="col">Salary</th>
+        <% end %>
+        <th colspan="3" scope="col"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.names %></td>
+          <td><%= user.lastnames %></td>
+          <td><%= user.type %></td>
+          <td><%= user.age %></td>
+          <td><%= user.cellphone %></td>
+          <td><%= user.email %></td>
+          <% if @type == "Pacient" %>
+            <td><%= user.init_preg_week %></td>
+            <td><%= user.category.status %></td>
+          <% elsif @type == "Secretary" %>
+            <td><%= " #{user.salary} MXN" %></td>
+          <% end %>
+          <td><%= link_to 'Mostrar', sti_user_path(user.type, user) %></td>
+          <td><%= link_to 'Editar', sti_user_path(user.type, user, :edit) %></td>
+          <td><%= link_to 'Destruir', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+  
+  <div>
+    <% if @type != "User" %>
+      <% if current_user.type == "Secretary" %>
+        <p><%= link_to "Nuevo #{@type}", sti_user_path(@type, nil, :new), class: "btn btn-outline-primary" %></p>
+      <% else %>
+        <p><%= link_to "Nuevo #{@type}", sti_user_path(@type, nil, :new), class: "btn btn-outline-primary" %></p>
+        <%= link_to "Todos los usuarios", sti_user_path("users"), class: "btn btn-outline-primary" %>
+      <% end %>
+    <% elsif current_user.type == "Secretary" %>
+      <p><%= link_to "Nueva Paciente", sti_user_path("pacient", nil, :new), class: "btn btn-outline-primary" %></p>
+    <% else %>
+      <p><%= link_to "Nueva Paciente", sti_user_path("pacient", nil, :new), class: "btn btn-outline-primary" %></p>
+      <p><%= link_to "Nueva Secretaria", sti_user_path("secretary", nil, :new), class: "btn btn-outline-secondary" %></p>
+      <p><%= link_to "Nuevo Administrador", sti_user_path("admin", nil, :new), class: "btn btn-outline-success" %></p>
+    <% end %>
+  </div>
+

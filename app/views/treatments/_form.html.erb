@@ -1,0 +1,38 @@
+<%= form_with(model: treatment, local: true) do |form| %>
+  <% if treatment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(treatment.errors.count, "error") %> prohibited this treatment from being saved:</h2>
+
+      <ul>
+      <% treatment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mt-4">
+    <%= form.label :dosis %>
+    <%= form.text_field :dosis, class: "form-control" %>
+  </div>
+
+  <div class="field mt-4">
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions, class: "form-control" %>
+  </div>
+
+  <div class="field mt-4">
+    <%= form.label "Paciente" %>
+    <%= form.collection_select :user_id, Pacient.all, :id, :whole_name, prompt: true, class: "form-control" %>
+  </div>
+
+  <div class="field mt-4">
+      <%= form.collection_check_boxes(:medicine_ids, Medicine.all, :id, :get_name) do |m| %>
+        <%= m.label { m.check_box + " " + m.text} %>
+      <% end %>
+  </div>
+
+  <div class="actions mt-4">
+    <%= form.submit %>
+  </div>
+<% end %>

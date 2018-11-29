@@ -1,0 +1,9 @@
+<div class="container mt-5">
+	<h1>Nuevo <%= @type %></h1>
+	<%= render 'form', user: @user %>
+	<p class="mt-4"><%= link_to "Regresar a #{@type}", sti_user_path(@type), class: "btn btn-outline-primary" %></p>
+	<% if current_user.type == "Admin" %>
+		<p><%= link_to "Regresar a todos los usuarios", sti_user_path("users"), class: "btn btn-outline-primary" %></p>
+	<% end %>
+</div>
+

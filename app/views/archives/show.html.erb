@@ -1,0 +1,30 @@
+<div class="jumbotron">
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <h1 class="display-3"><%= @archive.title %></h1> 
+	</p>
+
+	<p class="lead">
+	  <strong>Descripción:</strong>
+	  <%= @archive.description %>
+	</p>
+
+	<p class="lead">
+	  <strong>Usuario:</strong>
+	  <%= @archive.user.names + " " + @archive.user.lastnames %>
+	</p>
+
+	<p class="lead">
+		<strong>Documento:</strong>
+		<%= image_tag @archive.document_url, style:'height: 225px; width: 100%; display: block;'%>
+	</p>
+
+	<p class="lead">
+		<%= link_to 'Descargar archivo', @archive.document.url, class: "btn btn-outline-success" %>
+	</p>
+
+	<%= link_to 'Editar archivo', edit_archive_path(@archive), class: "btn btn-outline-success" %> |
+	<%= link_to 'Regresar a archivos', archives_path, class: "btn btn-outline-success" %>
+</div>
+

@@ -1,0 +1,35 @@
+<div class="jumbotron">
+  <p id="notice"><%= notice %></p>
+
+  <p class="lead">
+    <h1 class="display-4"><%= @appointment.title %></h1>
+  </p>
+
+  <p class="lead">
+    <strong>Description:</strong>
+    <%= @appointment.description %>
+  </p>
+
+  <p class="lead">
+    <strong>Appointment date:</strong>
+    <%= @appointment.appointment_date %>
+  </p>
+
+  <p class="lead">
+    <strong>Responsable:</strong>
+    <%= User.find(@appointment.responsable).names + " " + User.find(@appointment.responsable).lastnames%>
+  </p>
+
+  <p class="lead">
+    <strong>Paciente:</strong>
+    <%= @appointment.user.names + " " + @appointment.user.lastnames %>
+  </p>
+
+  <% if current_user.type != "Pacient" %>
+    <%= link_to 'Editar cita', edit_appointment_path(@appointment), class: "btn btn-outline-dark mt-3" %> |
+    <%= link_to 'Regresar a mis citas', appointments_path, class: "btn btn-outline-dark mt-3" %>
+  <% else %>
+    <%= link_to 'Regresar a mis citas', appointments_path, class: "btn btn-outline-dark" %>
+  <% end %>
+</div>
+

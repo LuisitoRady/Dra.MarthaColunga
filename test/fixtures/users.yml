@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  names: MyString
+  lastnames: MyString
+  type: 
+  age: 1
+  cellphone: MyString
+  email: MyString
+  init_preg_week: 1
+  salary: 9.99
+  category: one
+
+two:
+  names: MyString
+  lastnames: MyString
+  type: 
+  age: 1
+  cellphone: MyString
+  email: MyString
+  init_preg_week: 1
+  salary: 9.99
+  category: two
